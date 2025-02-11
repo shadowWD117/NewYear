@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Tahun Baru 2025</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #000428, #004e92);
+            color: #fff;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            margin-top: 15vh;
+            text-shadow: 0 0 10px #ffea00, 0 0 20px #ffea00;
+            animation: glow 1.5s infinite alternate;
+            transition: color 0.3s ease-in-out;
+        }
+
+        p {
+            text-align: center;
+            font-size: 1.5em;
+            margin-top: 10px;
+            opacity: 0;
+            animation: fadeIn 3s ease-in-out 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #ffea00, 0 0 20px #ffea00; }
+            to { text-shadow: 0 0 15px #ffea00, 0 0 30px #ffea00; }
+        }
+
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #f39c12, #d35400);
+            border-radius: 50%;
+            animation: explode 1.5s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(0.5); opacity: 1; }
+            50% { transform: scale(2.5); opacity: 0.8; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        .spark {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, yellow, transparent);
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: fadeOut 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeOut {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">Selamat Tahun Baru 2025!</h1>
+    <p>Semoga tahun ini penuh kebahagiaan, cinta, dan kebersamaan.</p>
+
+    <script>
+        const colors = ['#e74c3c', '#8e44ad', '#3498db', '#1abc9c', '#f1c40f'];
+
+        function createFirework(x, y) {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.style.background = colors[Math.floor(Math.random() * colors.length)];
+            firework.style.left = x + 'px';
+            firework.style.top = y + 'px';
+            document.body.appendChild(firework);
+
+            setTimeout(() => firework.remove(), 1500);
+        }
+
+        function createSpark(x, y) {
+            const spark = document.createElement('div');
+            spark.className = 'spark';
+            spark.style.left = x + 'px';
+            spark.style.top = y + 'px';
+            document.body.appendChild(spark);
+
+            setTimeout(() => spark.remove(), 800);
+        }
+
+        function changeTitleColor() {
+            const title = document.getElementById('title');
+            const newColor = colors[Math.floor(Math.random() * colors.length)];
+            title.style.color = newColor;
+        }
+
+        document.addEventListener('click', (e) => {
+            createFirework(e.clientX, e.clientY);
+            createSpark(e.clientX, e.clientY);
+            changeTitleColor();
+        });
+
+        document.addEventListener('touchstart', (e) => {
+            const touch = e.touches[0];
+            createFirework(touch.clientX, touch.clientY);
+            createSpark(touch.clientX, touch.clientY);
+            changeTitleColor();
+        });
+
+        setInterval(() => {
+            createFirework(Math.random() * window.innerWidth, Math.random() * window.innerHeight * 0.6);
+        }, 500);
+    </script>
+</body>
+</html>
